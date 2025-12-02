@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: dev.carlos.soft.pizzabyte
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle_kotlin
+features: [app-name, gradle, http-client-test, jackson-databind, java, java-application, jdbc-hikari, junit, micronaut-aot, micronaut-build, micronaut-http-validation, mysql, netty-server, readme, redis-lettuce, security-annotations, security-jwt, serialization-jackson, shade, slf4j-simple-logger, static-resources, test-resources, views-fieldset, views-thymeleaf, yaml, yaml-build]
