@@ -8,4 +8,8 @@ datasources:
     username: root
     password: root
     url: jdbc:mysql://localhost:3306/pizza_byte
+flyway:
+  datasources:
+    default:
+      enabled: true
 redis.uri: redis://localhost

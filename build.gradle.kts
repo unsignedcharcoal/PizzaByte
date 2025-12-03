@@ -18,6 +18,7 @@ dependencies {
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     annotationProcessor("org.projectlombok:lombok:1.18.40")
 
+    implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.redis:micronaut-redis-lettuce")
@@ -29,7 +30,10 @@ dependencies {
 
     compileOnly("io.micronaut:micronaut-http-client")
     compileOnly("org.projectlombok:lombok:1.18.40")
+    compileOnly("org.jetbrains:annotations:26.0.2-1")
 
+
+    runtimeOnly("org.flywaydb:flyway-mysql")
     runtimeOnly("com.mysql:mysql-connector-j")
     runtimeOnly("io.goodforgod:slf4j-simple-logger:2.0.0")
     runtimeOnly("org.yaml:snakeyaml")
