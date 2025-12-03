@@ -1,4 +1,4 @@
-package dev.carlos.soft.pizzabyte.storage;
+package dev.carlos.soft.pizzabyte.stock;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
@@ -15,15 +15,21 @@ import java.util.Optional;
 public class StockService {
 
     @Inject protected StockRepository stockRepository;
-    protected final Cache<@NotNull Long, StockItem> cache = Caffeine.newBuilder().expireAfterAccess(Duration.ofMinutes(30)).build();
+
+    protected final Cache<Long, StockItem> cache =
+            Caffeine.newBuilder()
+                    .expireAfterAccess(Duration.ofMinutes(30))
+                    .build();
 
     public Optional<StockItem> findById(Long id) {
-        var cached =  cache.getIfPresent(id);
+        StockItem cached = cache.getIfPresent(id);
         if (cached != null) {
             return Optional.of(cached);
         }
 
-        return stockRepository.findById(id);
+        Optional<StockItem> dbItem = stockRepository.findById(id);
+        dbItem.ifPresent(item -> cache.put(item.getId(), item));
+        return dbItem;
     }
 
     public List<StockItem> findAll() {
@@ -31,28 +37,37 @@ public class StockService {
     }
 
     public StockItem save(StockItem stockItem) {
-        cache.put(stockItem.getId(), stockItem);
-        return stockRepository.save(stockItem);
+
+        // 1. Save first (ID is generated)
+        StockItem saved = stockRepository.save(stockItem);
+
+        // 2. Cache only AFTER ID exists
+        if (saved.getId() != null) {
+            cache.put(saved.getId(), saved);
+        }
+
+        return saved;
     }
 
     public StockItem update(StockItem stockItem) {
         stockItem.setLastUpdate(System.currentTimeMillis());
-        return stockRepository.save(stockItem);
+
+        StockItem saved = stockRepository.save(stockItem);
+
+        // Update cache
+        if (saved.getId() != null) {
+            cache.put(saved.getId(), saved);
+        }
+
+        return saved;
     }
 
     public boolean existsById(Long id) {
-        var cached =  cache.getIfPresent(id);
-        if (cached != null) {
+        if (cache.getIfPresent(id) != null) {
             return true;
         }
-
         return stockRepository.existsById(id);
     }
 
-    public StockItem saveWithException(StockItem stockItem) {
-        cache.put(stockItem.getId(), stockItem);
-        return stockRepository.saveWithException(stockItem);
-    }
-
-
 }
+

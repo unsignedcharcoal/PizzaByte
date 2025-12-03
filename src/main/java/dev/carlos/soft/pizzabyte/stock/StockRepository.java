@@ -1,4 +1,4 @@
-package dev.carlos.soft.pizzabyte.storage;
+package dev.carlos.soft.pizzabyte.stock;
 
 import dev.carlos.soft.pizzabyte.domain.StockItem;
 import io.micronaut.data.exceptions.DataAccessException;
@@ -9,11 +9,5 @@ import jakarta.transaction.Transactional;
 
 @JdbcRepository(dialect = Dialect.MYSQL)
 public interface StockRepository extends PageableRepository<StockItem, Long>{
-
-    @Transactional
-    default StockItem saveWithException(StockItem stockItem) {
-        save(stockItem);
-        throw new DataAccessException("Stock already exists");
-    }
 
 }
