@@ -1,4 +1,4 @@
-package dev.carlos.soft.pizzabyte.storage;
+package dev.carlos.soft.pizzabyte.stock;
 
 import dev.carlos.soft.pizzabyte.domain.StockItem;
 import dev.carlos.soft.pizzabyte.utils.DataUtils;
@@ -43,20 +43,15 @@ public class StockController {
     //Why?
     //This will be usefully
     @Post
-    public HttpResponse<StockItem> save(@Body String jsonStock) {
-        StockItem item = DataUtils.deserialize(jsonStock, StockItem.class);
-
-        if (item == null) {
-            return HttpResponse.badRequest();
-        }
-
+    public HttpResponse<StockItem> save(@Body StockItem item) {
         try {
-            var savedItem = service.saveWithException(item);
+            var savedItem = service.save(item);
             return HttpResponse.created(savedItem);
-        } catch (DataAccessException e) {
-            return HttpResponse.notFound();
+        } catch (Exception e) {
+            return HttpResponse.serverError();
         }
     }
+
 
     @Put("/{id}")
     public HttpResponse<StockItem> update(@PathVariable long id, @Body String jsonStock) {

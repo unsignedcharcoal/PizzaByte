@@ -1,20 +1,25 @@
 package dev.carlos.soft.pizzabyte.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.data.annotation.GeneratedValue;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.MappedEntity;
 import io.micronaut.serde.annotation.Serdeable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 @Serdeable
 @MappedEntity
 public class StockItem {
 
     @Id
     @GeneratedValue(GeneratedValue.Type.AUTO)
+    @JsonIgnore
     private Long id;
 
     private String namespace;
@@ -23,4 +28,15 @@ public class StockItem {
 
     private long lastUpdate;
 
+    @JsonCreator
+    public StockItem(
+            @JsonProperty("namespace") String namespace,
+            @JsonProperty("amount") int amount,
+            @JsonProperty("lastUpdate") long lastUpdate
+    ) {
+        this.namespace = namespace;
+        this.amount = amount;
+        this.lastUpdate = lastUpdate;
+    }
 }
+
