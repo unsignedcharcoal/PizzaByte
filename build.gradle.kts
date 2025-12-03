@@ -15,14 +15,12 @@ repositories {
 dependencies {
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     annotationProcessor("io.micronaut:micronaut-http-validation")
-    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     annotationProcessor("org.projectlombok:lombok:1.18.40")
 
     implementation("io.micronaut.data:micronaut-data-jdbc")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.redis:micronaut-redis-lettuce")
-    implementation("io.micronaut.security:micronaut-security-jwt")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.views:micronaut-views-fieldset")
@@ -39,7 +37,6 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     aotPlugins(platform("io.micronaut.platform:micronaut-platform:4.10.2"))
-    aotPlugins("io.micronaut.security:micronaut-security-aot")
 }
 
 
@@ -47,8 +44,8 @@ application {
     mainClass = "dev.carlos.soft.pizzabyte.Application"
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("25")
-    targetCompatibility = JavaVersion.toVersion("25")
+    sourceCompatibility = JavaVersion.toVersion("21")
+    targetCompatibility = JavaVersion.toVersion("21")
 }
 
 
@@ -81,7 +78,7 @@ micronaut {
 
 
 tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
-    jdkVersion = "25"
+    jdkVersion = "21"
 }
 
 

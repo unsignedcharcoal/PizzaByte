@@ -1,16 +1,11 @@
 micronaut:
   application:
     name: pizzaByte
-  security:
-    authentication: bearer
-    token:
-      jwt:
-        signatures:
-          secret:
-            generator:
-              secret: ${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}
 datasources:
   default:
     driver-class-name: com.mysql.cj.jdbc.Driver
     db-type: mysql
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/pizza_byte
 redis.uri: redis://localhost
