@@ -7,6 +7,7 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
+import jakarta.inject.Inject;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -17,17 +18,18 @@ import java.util.Optional;
 @AllArgsConstructor
 public class StockController {
 
-    protected final StockRepository repository;
+    @Inject
+    protected final StockService service;
 
     @Get("/{id}")
     public Optional<StockItem> getById(@PathVariable long id) {
-        return repository.findById(id);
+        return service.findById(id);
     }
 
     @Get("/list")
     public HttpResponse<List<StockItem>> getAll() {
         try {
-            var list = repository.findAll();
+            var list = service.findAll();
             if (list == null || list.isEmpty()) {
                 return HttpResponse.notFound();
             }
@@ -49,7 +51,7 @@ public class StockController {
         }
 
         try {
-            var savedItem = repository.saveWithException(item);
+            var savedItem = service.saveWithException(item);
             return HttpResponse.created(savedItem);
         } catch (DataAccessException e) {
             return HttpResponse.notFound();
@@ -64,13 +66,11 @@ public class StockController {
             return HttpResponse.badRequest();
         }
 
-        if (!repository.existsById(id)) {
+        if (!service.existsById(id)) {
             return HttpResponse.notFound();
         }
 
-        item.setLastUpdate(System.currentTimeMillis());
-
-        StockItem updatedItem = repository.update(item);
+        StockItem updatedItem = service.update(item);
 
         return HttpResponse.created(updatedItem);
     }

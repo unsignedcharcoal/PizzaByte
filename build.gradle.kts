@@ -25,6 +25,7 @@ dependencies {
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.views:micronaut-views-fieldset")
     implementation("io.micronaut.views:micronaut-views-thymeleaf")
+    implementation("com.github.ben-manes.caffeine:caffeine:3.2.3")
 
     compileOnly("io.micronaut:micronaut-http-client")
     compileOnly("org.projectlombok:lombok:1.18.40")
