@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Stock Item</title>
+</head>
+<body>
+<div th:if="${stockItem != null}">
+    <p><strong>Namespace:</strong> <span th:text="${stockItem.namespace}"></span></p>
+    <p><strong>Amount:</strong> <span th:text="${stockItem.amount}"></span></p>
+    <p><strong>Last Update:</strong> <span th:text="${stockItem.lastUpdate}"></span></p>
+</div>
+
+<div th:if="${stockItem == null}">
+    <h1>Item is null</h1>
+</div>
+
+</body>
+</html>

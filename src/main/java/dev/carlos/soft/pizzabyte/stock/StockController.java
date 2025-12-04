@@ -7,10 +7,13 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
 import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
+import io.micronaut.views.View;
 import jakarta.inject.Inject;
 import lombok.AllArgsConstructor;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @ExecuteOn(TaskExecutors.BLOCKING) // I love ASYNC but, I can't use in this project
@@ -21,9 +24,10 @@ public class StockController {
     @Inject
     protected final StockService service;
 
+    @View("stock/view-single")
     @Get("/{id}")
-    public Optional<StockItem> getById(@PathVariable long id) {
-        return service.findById(id);
+    public Map<String, StockItem> getById(@PathVariable long id) {
+        return Collections.singletonMap("stockItem", service.findById(id).orElse(null));
     }
 
     @Get("/list")
