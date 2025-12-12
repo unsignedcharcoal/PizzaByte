@@ -1,19 +1,395 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>Stock Item</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Single</title>
+    <script src="https://kit.fontawesome.com/c3423ba623.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
+
 <body>
-<div th:if="${stockItem != null}">
-    <p><strong>Namespace:</strong> <span th:text="${stockItem.namespace}"></span></p>
-    <p><strong>Amount:</strong> <span th:text="${stockItem.amount}"></span></p>
-    <p><strong>Last Update:</strong> <span th:text="${stockItem.lastUpdate}"></span></p>
-</div>
+<div class="wrapper">
+    <div class="left-bar-block">
+        <div class="left-side-bar box-shadow">
+            <div class="logo">
+                <img src="logo.png" alt="">
+            </div>
+            <ul>
+                <li id="selected"><a href="#"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="#"><i class="fa-solid fa-warehouse"></i></a></li>
+                <li><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li><a href="#"><i class="fa-solid fa-coins"></i></a></li>
+            </ul>
+        </div>
+    </div>
 
-<div th:if="${stockItem == null}">
-    <h1>Item is null</h1>
-</div>
+    <div class="dashboard-block">
+        <div class="top-bar">
+            <div class="row">
+                <div class="">
+                    <h3>Boa Tarde, <b>Carlos</b></h3>
+                </div>
 
+                <div class=""></div>
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+
+        <div class="mini-card-block">
+            <div class="info-card box-shadow">
+                <div class="icon">
+                    <i class="fa-solid fa-suitcase"></i>
+                </div>
+                <div class="info">
+                    <h4>100</h4>
+                    <p>Pizzas pedidas</p>
+                </div>
+            </div>
+
+            <div class="info-card box-shadow">
+                <div class="icon">
+                    <i class="fa-solid fa-truck"></i>
+                </div>
+                <div class="info">
+                    <h4>97</h4>
+                    <p>Pizzas entregues</p>
+                </div>
+            </div>
+
+            <div class="info-card box-shadow">
+                <div class="icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="info">
+                    <h4>123</h4>
+                    <p>Clientes atendidos</p>
+                </div>
+            </div>
+        </div>
+
+        <!--CARDS-->
+        <div class="detailed-card-block">
+
+            <div class="detailed-card box-shadow">
+                <div class="detailed-card-header green-card">
+                    <div class="icon">
+                        <i class="fa-solid fa-warehouse"></i>
+                    </div>
+                    <h4>Estoque</h4>
+                    <a href="#">
+                        <h4>Ver tudo <i class="fa-solid fa-angles-right"></i></h4>
+                    </a>
+                </div>
+                <!--Do the IF here ### START IF ### -->
+                <div class="detailed-card-alert box-shadow">
+                    <h4>Estoque baixo</h4>
+                    <h5>999 Item</h5>
+                </div>
+                <!--### END IF ###-->
+                <div class="detailed-card-body">
+                    <ul class="stock-enough-list">
+                        <li class="stock-enough-item">
+                            <div class="stock-item-body">
+                                <div class="image">
+                                    <img src="w700_aceituna_negra.jpg" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <h4>Azeitona Preta</h4>
+                                </div>
+                                <div class="order-now">
+                                    <h4>Mais <i class="fa-solid fa-angles-right"></i></h4>
+                                </div>
+                            </div>
+                            <div class="stock-item-footer">
+                                <p>Status: </p>
+                                <span id="available">Suficiente</span>
+                                <p id="divisor">/</p>
+                                <span id="available">15kg</span>
+                            </div>
+                        </li>
+
+                        <li class="stock-enough-item">
+                            <div class="stock-item-body">
+                                <div class="image">
+                                    <img src="olive_360750014.jpg" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <h4>Azeitona</h4>
+                                </div>
+                                <div class="order-now">
+                                    <h4>Mais <i class="fa-solid fa-angles-right"></i></h4>
+                                </div>
+                            </div>
+                            <div class="stock-item-footer">
+                                <p>Status: </p>
+                                <span id="atention">Acabando</span>
+                                <p id="divisor">/</p>
+                                <span id="atention">200 gramas</span>
+                            </div>
+                        </li>
+
+
+                        <li class="stock-enough-item">
+                            <!--again do the if here ### START IF ###-->
+                            <div class="stock-empty-item">
+                                <p>As pizzas que usam esse item não estão disponiveis</p>
+                            </div>
+                            <!--### END IF ###-->
+                            <div class="stock-item-body">
+                                <div class="image">
+                                    <img src="queijo.jpeg" alt="">
+                                </div>
+                                <div class="item-title">
+                                    <h4>Queijo Mussarela</h4>
+                                </div>
+                                <div class="order-now">
+                                    <h4>Mais <i class="fa-solid fa-angles-right"></i></h4>
+                                </div>
+                            </div>
+                            <div class="stock-item-footer">
+                                <p>Status: </p>
+                                <span id="empty">Suficiente</span>
+                                <p id="divisor">/</p>
+                                <span id="empty">Nada</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="detailed-card-box">
+                <div class="detailed-card box-shadow" style="height: 500px;">
+                    <div class="detailed-card-header brown-card">
+                        <div class="icon">
+                            <i class="fa-solid fa-chair"></i>
+                        </div>
+                        <h4>Mesas reservadas</h4>
+                        <a href="#">
+                            <h4>Ver tudo <i class="fa-solid fa-angles-right"></i></h4>
+                        </a>
+                    </div>
+                    <div class="detailed-card-body">
+                        <div class="reserved-table">
+                            <ul>
+                                <li>
+                                    <div class="table-card">
+                                        <div class="table-info">
+                                            <p>Mesa: <b>40</b></p>
+                                            <p>Pessoas: <i class="fa-solid fa-person"></i><i
+                                                    class="fa-solid fa-person"></i><i
+                                                    class="fa-solid fa-person"></i><i
+                                                    class="fa-solid fa-person"></i></p>
+                                        </div>
+                                        <div class="costumer-info">
+                                            <p>Reservado por: <b>Carlos</b></p>
+                                            <p>Horas: <b>20h</b></p>
+                                        </div>
+                                    </div>
+                                    <div class="table-status">
+                                        <p id="person">3/4 <i class="fa-solid fa-person"></i></p>
+                                        <div class="table-progess">
+                                            <progress id='p0' value='65' max='100' style="width: 100px;"></progress>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="table-card">
+                                        <div class="table-info">
+                                            <p>Mesa: <b>01</b></p>
+                                            <p>Pessoas: <i class="fa-solid fa-person"></i><i
+                                                    class="fa-solid fa-person"></i></p>
+                                        </div>
+                                        <div class="costumer-info">
+                                            <p>Reservado por: <b>Carlos</b></p>
+                                            <p>Horas: <b>h</b></p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="table-card">
+                                        <div class="table-info">
+                                            <p>Mesa: <b>17</b></p>
+                                            <p>Pessoas: <i class="fa-solid fa-person"></i></p>
+                                        </div>
+                                        <div class="costumer-info">
+                                            <p>Reservado por: <b>Carlos</b></p>
+                                            <p>Horas: <b>20h</b></p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="table-card">
+                                        <div class="table-info">
+                                            <p>Mesa: <b>32</b></p>
+                                            <p>Pessoas: <i class="fa-solid fa-person"></i><i
+                                                    class="fa-solid fa-person"></i><i
+                                                    class="fa-solid fa-person"></i>
+                                            </p>
+                                        </div>
+                                        <div class="costumer-info">
+                                            <p>Reservado por: <b>Carlos</b></p>
+                                            <p>Horas: <b>20h</b></p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="detailed-card box-shadow" style="height: 210px;">
+                    <div class="detailed-card-header black-card">
+                        <div class="icon">
+                            <i class="fa-solid fa-quote-right"></i>
+                        </div>
+                        <h4>Em breve</h4>
+                        <a href="#">
+                            <h4>Ver tudo <i class="fa-solid fa-angles-right"></i></h4>
+                        </a>
+                    </div>
+                    <div class="detailed-card-body">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="detailed-card-box">
+                <div class="detailed-card box-shadow">
+                    <div class="detailed-card-header gold-card">
+                        <div class="icon">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <h4>Financeiro</h4>
+                        <a href="#">
+                            <h4>Ver tudo <i class="fa-solid fa-angles-right"></i></h4>
+                        </a>
+                    </div>
+                    <div class="detailed-card-body finance">
+                        <div class="info-block">
+                            <div id="info">
+                                <p>Dispensa:</p>
+                                <h4 id="nummer">R$ 1.250,10</h4>
+                            </div>
+                            <div id="more">
+                                <a href="#">
+                                    <h4>Mais <i class="fa-solid fa-angles-right"></i></h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="info-block">
+                            <div id="info">
+                                <p>Receita:</p>
+                                <h4 id="nummer">R$ 3.400,00</h4>
+                            </div>
+                            <div id="more">
+                                <a href="#">
+                                    <h4>Mais <i class="fa-solid fa-angles-right"></i></h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detailed-card box-shadow">
+                    <div class="detailed-card-header wheat-card">
+                        <div class="icon">
+                            <i class="fa-solid fa-pizza-slice"></i>
+                        </div>
+                        <h4>Pizzas mais vendidas</h4>
+                        <a href="#">
+                            <h4>Ver tudo <i class="fa-solid fa-angles-right"></i></h4>
+                        </a>
+                    </div>
+
+                    <div class="detailed-card-body best-seller-pizza">
+                        <span id="today-pizza">Confira a lista abaixo das pizzas de hoje</span>
+                        <ul>
+                            <li>
+                                <h4>Portuguesa 🥹</h4>
+                                <div class="pizza-bar">
+                                    <progress id='p0' value='65' max='100'></progress>
+                                </div>
+                            </li>
+
+                            <li>
+                                <h4>Quatro Queijo 🤨</h4>
+                                <div class="pizza-bar">
+                                    <progress id='p0' value='30' max='100'></progress>
+                                </div>
+                            </li>
+
+                            <li>
+                                <h4>Atum 😣</h4>
+                                <div class="pizza-bar">
+                                    <progress id='p0' value='10' max='100'></progress>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order-block">
+        <div class="orders-panel">
+            <div class="order-panel-header">
+                <h4 id="title">Pedidos</h4>
+                <div class="task-button">
+                        <span>
+                            <a href="#">+ Novo Pedido</a>
+                        </span>
+                </div>
+            </div>
+            <ul>
+                <li class="box-shadow">
+                    <div class="order-card-header">
+                        <div class="consumer-info">
+                            <h2>Richard</h2>
+                            <div class="order-id">
+                                <p id="id">ID: <b>10023</b> | <b>6 Item's</b></p>
+                            </div>
+                            <div class="order-pay">
+                                <h4>R$ 250,00</h4>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <span id="done">Pronto</span>
+                            <div class="info">
+                                <p><i class="fa-solid fa-utensils"></i></p>
+                                <p id="division">|</p>
+                                <p>Baixar <i class="fa-solid fa-download"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="order-pizza">
+                            <div class="order-pizza-name">
+                                <p>Portuguesa</p>
+                            </div>
+                            <div class="order-pizza-info">
+                                <p>Grande</p>
+                                <h4>R$ 54,00</h4>
+                            </div>
+                        </li>
+                        <li class="order-pizza">
+                            <div class="order-pizza-name">
+                                <p>Portuguesa</p>
+                            </div>
+                            <div class="order-pizza-info">
+                                <p>Grande</p>
+                                <h4>R$ 54,00</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
 </body>
+
 </html>
